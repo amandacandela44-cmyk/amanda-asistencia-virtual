@@ -59,7 +59,7 @@ h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;line-height
 .channel-modal h2{font-size:38px;margin:8px 0 10px}.channel-modal p{color:var(--muted);margin:0 0 22px}
 .channel-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.channel-option{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:17px;text-align:left;cursor:pointer;color:var(--ink)}.channel-option:hover{border-color:var(--terracotta);transform:translateY(-1px)}.channel-option strong{display:block;font-size:15px}.channel-option span{display:block;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}
 @media(max-width:600px){.channel-modal{padding:25px 20px}.channel-modal h2{font-size:30px}.channel-options{grid-template-columns:1fr}.channel-option{padding:15px}}
-.modal-backdrop{position:fixed;inset:0;background:rgba(24,31,35,.58);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.modal-backdrop:target{display:flex}.modal-backdrop.open{display:flex}.contact-modal{width:min(650px,100%);max-height:90vh;overflow:auto;background:var(--cream);border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.25);padding:30px;position:relative}.modal-close{position:absolute;text-decoration:none;line-height:1;display:block;top:15px;right:17px;border:0;background:transparent;font-size:27px;color:var(--muted);cursor:pointer}.contact-modal h2{font-size:38px;margin-bottom:8px}.contact-modal>p{color:var(--muted);margin-top:0}.contact-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}.choice{background:var(--white);border:1px solid var(--line);border-radius:17px;padding:16px;cursor:pointer;text-align:left}.choice strong{display:block}.choice span{font-size:12px;color:var(--muted)}.choice.active{border:2px solid var(--terracotta);padding:15px}.contact-form{display:grid;gap:13px}.contact-form label{font-size:13px;font-weight:700}.contact-form input,.contact-form select,.contact-form textarea{width:100%;margin-top:6px;padding:12px 13px;border:1px solid rgba(36,49,58,.16);border-radius:12px;background:var(--white);font:inherit;color:var(--ink)}.contact-form textarea{min-height:105px;resize:vertical}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.form-help{font-size:12px;color:var(--muted);margin:0}.whatsapp-note{display:none;padding:12px 14px;border-radius:12px;background:#E7ECE7;color:#4D5B53;font-size:12px}.whatsapp-note.show{display:block}
+.modal-backdrop{position:fixed;inset:0;background:rgba(24,31,35,.58);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}.modal-backdrop.open{display:flex}.contact-modal{width:min(650px,100%);max-height:90vh;overflow:auto;background:var(--cream);border-radius:28px;box-shadow:0 30px 90px rgba(0,0,0,.25);padding:30px;position:relative}.modal-close{position:absolute;text-decoration:none;line-height:1;display:block;top:15px;right:17px;border:0;background:transparent;font-size:27px;color:var(--muted);cursor:pointer}.contact-modal h2{font-size:38px;margin-bottom:8px}.contact-modal>p{color:var(--muted);margin-top:0}.contact-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}.choice{background:var(--white);border:1px solid var(--line);border-radius:17px;padding:16px;cursor:pointer;text-align:left}.choice strong{display:block}.choice span{font-size:12px;color:var(--muted)}.choice.active{border:2px solid var(--terracotta);padding:15px}.contact-form{display:grid;gap:13px}.contact-form label{font-size:13px;font-weight:700}.contact-form input,.contact-form select,.contact-form textarea{width:100%;margin-top:6px;padding:12px 13px;border:1px solid rgba(36,49,58,.16);border-radius:12px;background:var(--white);font:inherit;color:var(--ink)}.contact-form textarea{min-height:105px;resize:vertical}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.form-help{font-size:12px;color:var(--muted);margin:0}.whatsapp-note{display:none;padding:12px 14px;border-radius:12px;background:#E7ECE7;color:#4D5B53;font-size:12px}.whatsapp-note.show{display:block}
 
 .mobile-nav{display:none;position:relative}.js-no-scroll{overflow:hidden}.menu-toggle{width:44px;height:44px;border:1px solid var(--line);background:var(--white);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer;padding:0}.menu-toggle span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;flex:none}.mobile-menu{display:none}
 .footer-brand{display:flex;flex-direction:column;gap:9px}
@@ -432,6 +432,22 @@ body.modal-open{overflow:hidden}
     if(channelWhatsapp) channelWhatsapp.onclick=function(){ var c=document.getElementById('channelCheck'); if(c)c.checked=false; window.location.href=wa(planMessage(selectedPlan)); };
     if(form) form.onsubmit=function(e){ e.preventDefault(); var d=new FormData(form); var body='Nombre: '+(d.get('nombre')||'')+'\nEmpresa / negocio: '+(d.get('empresa')||'')+'\nEmail: '+(d.get('email')||'')+'\nTeléfono: '+(d.get('telefono')||'')+'\nTipo de negocio: '+(d.get('tipo')||'')+'\n\nMensaje:\n'+(d.get('mensaje')||''); if(method==='whatsapp')window.location.href=wa(body); else window.location.href='mailto:'+email+'?subject='+encodeURIComponent('Consulta desde la web')+'&body='+encodeURIComponent(body); return false; };
   });
+})();
+</script>
+<script id="contact-modal-authoritative-fix">
+(function(){
+  function resetContactOnLoad(){
+    var contact=document.getElementById('contactCheck');
+    var channel=document.getElementById('channelCheck');
+    if(contact) contact.checked=false;
+    if(channel) channel.checked=false;
+    var backdrop=document.getElementById('contacto');
+    if(backdrop) backdrop.classList.remove('open');
+    var channelBackdrop=document.getElementById('channelChoice');
+    if(channelBackdrop) channelBackdrop.classList.remove('open');
+    if(window.location.hash==='#contacto' || window.location.hash==='#contact-close') history.replaceState(null, document.title, window.location.pathname + window.location.search);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',resetContactOnLoad); else resetContactOnLoad();
 })();
 </script>
 <script id="mobile-menu-authoritative-final-js">
