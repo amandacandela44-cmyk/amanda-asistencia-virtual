@@ -889,6 +889,16 @@ body.modal-open{overflow:hidden}
   .footer-row{gap:14px !important;}
 }
 </style>
+
+<style id="v42-contact-fixes">
+/* V42 — floating contact stays at lower-right and remains clear of back-to-top */
+.floating-contact{right:22px!important;bottom:22px!important;z-index:40!important;}
+.back-to-top.always{right:22px!important;bottom:88px!important;z-index:25!important;}
+@media(max-width:600px){
+  .floating-contact{right:14px!important;bottom:14px!important;}
+  .back-to-top.always{right:14px!important;bottom:76px!important;}
+}
+</style>
 </head>
 <body>
 <header class="topbar"><div class="container nav"><a class="brand" href="#inicio" aria-label="Amanda — Asistencia Virtual"><svg class="brand-logo" viewBox="0 0 330 92" role="img" aria-label="Amanda — Asistencia Virtual" xmlns="http://www.w3.org/2000/svg">
@@ -960,6 +970,22 @@ body.modal-open{overflow:hidden}
   <span class="footer-contact-line"><span class="footer-contact-icon email-icon" aria-hidden="true">✉</span> amanda.asistenciavirtual@gmail.com</span>
 </span></div></footer>
 
+<div class="floating-contact" id="floatingContact">
+  <button class="floating-contact-toggle" id="floatingContactToggle" type="button" aria-expanded="false" aria-controls="floatingContactPanel">
+    <span class="floating-contact-icon" aria-hidden="true"><span></span></span>
+    <span>Contacto</span>
+  </button>
+  <div class="floating-contact-panel" id="floatingContactPanel" aria-hidden="true">
+    <button class="floating-contact-option floating-contact-form" id="floatingContactForm" type="button">
+      <span class="floating-option-icon form-icon" aria-hidden="true">✉</span>
+      <span><strong>Formulario de contacto</strong><small>Envíame tu consulta</small></span>
+    </button>
+    <button class="floating-contact-option floating-contact-wa" id="floatingContactWhatsapp" type="button">
+      <span class="floating-option-icon wa-icon" aria-hidden="true">◔</span>
+      <span><strong>WhatsApp</strong><small>Abrir con un mensaje preparado</small></span>
+    </button>
+  </div>
+</div>
 <button class="back-to-top always" id="backToTop" type="button" aria-label="Volver al inicio" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'});">↑</button>
 <span id="contact-close" class="contact-close-anchor" aria-hidden="true"></span>
 <input id="channelCheck" type="checkbox" aria-hidden="true">
@@ -1934,4 +1960,80 @@ body.modal-open{overflow:hidden}
   font-weight:700 !important;
 }
 
+
+<style id="floating-contact-v41">
+.floating-contact{position:fixed;right:22px;bottom:22px;z-index:40;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.floating-contact-toggle{border:0;min-height:54px;padding:0 22px;border-radius:28px;background:var(--ink);color:#fff;box-shadow:0 12px 30px rgba(36,49,58,.22);display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 15px/1 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+.floating-contact-toggle:hover{background:var(--terracotta);transform:translateY(-1px);box-shadow:0 15px 34px rgba(36,49,58,.25)}
+.floating-contact-icon{width:23px;height:23px;border:2px solid #fff;border-radius:6px;display:inline-block;position:relative;flex:none}
+.floating-contact-icon:after{content:"";position:absolute;left:3px;bottom:-5px;width:7px;height:7px;border-left:2px solid #fff;transform:skew(-18deg)}
+.floating-contact-icon span{position:absolute;left:4px;right:4px;top:7px;height:2px;border-radius:2px;background:#fff;box-shadow:0 5px 0 #fff}
+.floating-contact-panel{position:absolute;right:0;bottom:66px;width:320px;padding:12px;background:var(--white);border:1px solid rgba(36,49,58,.12);border-radius:22px;box-shadow:0 18px 50px rgba(36,49,58,.18);display:grid;gap:9px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:opacity .18s,transform .18s,visibility .18s}
+.floating-contact.is-open .floating-contact-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+.floating-contact-option{width:100%;min-height:70px;border:1px solid rgba(36,49,58,.12);border-radius:16px;background:#fff;color:var(--ink);padding:13px 15px;display:flex;align-items:center;gap:13px;text-align:left;cursor:pointer;font:inherit}
+.floating-contact-option:hover{border-color:var(--terracotta);background:var(--cream)}
+.floating-contact-option strong{display:block;font-size:15px;line-height:1.25}
+.floating-contact-option small{display:block;margin-top:3px;color:var(--muted);font-size:12px;line-height:1.3}
+.floating-option-icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;flex:none;font-size:19px;font-weight:700}
+.floating-contact-form .form-icon{background:var(--terracotta);color:#fff}
+.floating-contact-wa .wa-icon{background:var(--sage);color:#fff;font-size:22px;line-height:1}
+.floating-contact-wa:hover{border-color:var(--sage)}
+/* Keep the floating contact clear of the always-visible back-to-top control. */
+.back-to-top.always{bottom:88px}
+@media(max-width:600px){
+  .floating-contact{right:14px;bottom:14px}
+  .floating-contact-toggle{min-height:50px;padding:0 17px;border-radius:26px;font-size:14px;gap:8px}
+  .floating-contact-icon{width:21px;height:21px}
+  .floating-contact-panel{right:0;bottom:62px;width:min(300px,calc(100vw - 28px));padding:10px;border-radius:19px}
+  .floating-contact-option{min-height:66px;padding:11px 13px}
+  .floating-option-icon{width:36px;height:36px;border-radius:11px}
+  .back-to-top.always{bottom:76px}
+}
+</style>
+
+<script id="floating-contact-v41-js">
+(function(){
+  function initFloatingContact(){
+    var root=document.getElementById('floatingContact');
+    var toggle=document.getElementById('floatingContactToggle');
+    var formBtn=document.getElementById('floatingContactForm');
+    var waBtn=document.getElementById('floatingContactWhatsapp');
+    var contact=document.getElementById('contactCheck');
+    if(!root||!toggle) return;
+    function close(){root.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');var panel=document.getElementById('floatingContactPanel');if(panel)panel.setAttribute('aria-hidden','true');}
+    function open(){root.classList.add('is-open');toggle.setAttribute('aria-expanded','true');var panel=document.getElementById('floatingContactPanel');if(panel)panel.setAttribute('aria-hidden','false');}
+    toggle.addEventListener('click',function(e){e.preventDefault();root.classList.contains('is-open')?close():open();});
+    if(formBtn)formBtn.addEventListener('click',function(){close();if(contact)contact.checked=true;});
+    if(waBtn)waBtn.addEventListener('click',function(){
+      close();
+      var message='Hola Amanda. He visto tu web y me gustaría saber más sobre tu servicio de asistencia virtual.';
+      var number='';
+      var url=(number?'https://wa.me/'+number:'https://wa.me/')+'?text='+encodeURIComponent(message);
+      window.open(url,'_blank','noopener,noreferrer');
+    });
+    document.addEventListener('click',function(e){if(root.classList.contains('is-open')&&!root.contains(e.target))close();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initFloatingContact);else initFloatingContact();
+})();
+</script>
+
+<script id="v42-contact-outside-close">
+(function(){
+  function initOutsideClose(){
+    var contactBackdrop=document.getElementById('contacto');
+    var contactCheck=document.getElementById('contactCheck');
+    var channelBackdrop=document.getElementById('channelChoice');
+    var channelCheck=document.getElementById('channelCheck');
+    function desktopOnly(){ return window.matchMedia ? window.matchMedia('(min-width: 821px)').matches : window.innerWidth >= 821; }
+    if(contactBackdrop) contactBackdrop.addEventListener('click',function(e){
+      if(desktopOnly() && e.target===contactBackdrop && contactCheck) contactCheck.checked=false;
+    });
+    if(channelBackdrop) channelBackdrop.addEventListener('click',function(e){
+      if(desktopOnly() && e.target===channelBackdrop && channelCheck) channelCheck.checked=false;
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initOutsideClose); else initOutsideClose();
+})();
+</script>
 </body></html>
