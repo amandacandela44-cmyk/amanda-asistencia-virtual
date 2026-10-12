@@ -1,0 +1,16 @@
+ARCHIVOS PARA GITHUB PAGES — AMANDA ASISTENCIA VIRTUAL
+
+Contenido:
+- index.html: versión actualizada desde Amanda_Asistencia_Virtual_V47.html.
+- assets/logo-amanda.png: logo suministrado en PNG.
+- politica-privacidad.pdf: PDF de política de privacidad suministrado.
+
+Cambios realizados:
+- Sustituido el logo inline del encabezado y del footer por el PNG proporcionado.
+- Añadida una fila legal al footer sin cambiar el resto del diseño.
+- Política de privacidad enlazada al PDF incluido.
+- Aviso legal, política de cookies y condiciones del servicio aparecen como texto no enlazado porque están pendientes de cierre.
+
+Para publicar: sube index.html, la carpeta assets y politica-privacidad.pdf al mismo nivel/rutas que aparecen aquí en el repositorio de GitHub Pages.
+
+Nota: la fuente disponible utilizada es Amanda_Asistencia_Virtual_V47.html (8 de octubre de 2026), porque no aparece un index.html más reciente entre los archivos disponibles. No se ha rediseñado la web; solo se han sustituido los dos logos y añadido el footer legal.
